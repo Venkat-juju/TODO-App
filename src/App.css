@@ -1,38 +1,101 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  background-image: linear-gradient(120deg, #f6d365, #fda085);
   min-height: 100vh;
+}
+
+.form-div {
+  min-height: 20vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+}
+
+li {
+  width: 90%;
+  background-color: white;
+  margin: 2px 0px;
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+}
+
+li p {
+  width: 70%;
+  padding: 0px 5px;
+}
+
+li button {
+  width: 15%;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  color: white;
+  height: 50px;
+}
+
+#complete-btn {
+  background-color: green;
+}
+
+#delete-btn {
+  background-color: red;
+  border-left: 2px solid white;
+}
+
+form  input, form  button {
+  background: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem;  
+  outline: none;
+}
+
+form button {
+  background-color: white;
+  color: #fda085;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#todo-submit-button:hover {
+  background-color: #fda085;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.completed-task {
+  opacity: 0.3;
+  text-decoration: line-through;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media(max-width: 480px) {
+  .form-div {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  form input {
+    width: 80%;
   }
+  form {
+    width: 80%;
+  }
+}
+
+select {
+  margin-top: 5px;
+  padding: 2px;
+  outline: none;
+  border: none;
 }
