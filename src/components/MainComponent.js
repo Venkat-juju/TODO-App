@@ -43,7 +43,6 @@ class Main extends Component {
 				}
 			]
 		});
-		//this.saveToLocalStorage();
 	}
 
 	saveToLocalStorage() {
@@ -85,8 +84,6 @@ class Main extends Component {
 				}
 			})
 		});
-
-		//this.saveToLocalStorage();
 	};
 
 	deleteHandler(deleted) {
@@ -94,13 +91,14 @@ class Main extends Component {
 		this.setState({
 			todos: this.state.todos.filter((todo) => todo.id !== deleted.id)
 		});		
-		
-		//this.saveToLocalStorage();
 	};
 
 	render() {
 		return (
 			<>
+				<div className="heading">
+					<h3>TODO List</h3>
+				</div>
 				<Form 
 					changeTodoHandler={this.changeTodoHandler} 
 					changeGroupHandler={this.changeGroupHandler} 

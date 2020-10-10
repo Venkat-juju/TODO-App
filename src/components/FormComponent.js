@@ -11,7 +11,7 @@ function Form(props) {
 	return (
 		<div className="form-div">
 		<form onSubmit={handleSubmit}>
-			<input type="text" value={props.todo} id="todo-input" name="todo-input" onChange={props.changeTodoHandler} />
+			<input type="text" value={props.todo} id="todo-input" name="todo-input" onChange={props.changeTodoHandler} placeholder="Add here..." />
 			<button type="submit" id="todo-submit-button" name="todo-submit-button">
 				<i className="fa fa-plus-square"></i>
 			</button>
