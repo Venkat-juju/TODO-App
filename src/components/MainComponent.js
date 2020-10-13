@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from './FormComponent';
 import Todos from './TodosComponent';
 import 'font-awesome/css/font-awesome.css';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 class Main extends Component {
 
@@ -21,6 +22,7 @@ class Main extends Component {
 		this.deleteHandler = this.deleteHandler.bind(this);
 		this.saveToLocalStorage = this.saveToLocalStorage.bind(this);
 		this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
+		this.onDragEnd = this.onDragEnd.bind(this);
 	}
 
 	componentDidUpdate() {
@@ -93,9 +95,37 @@ class Main extends Component {
 		});		
 	};
 
+	onDragEnd(result) {
+		const {destination, source, reason} = result;
+
+		if (!destination || reason === 'CANCEL') {
+			return;
+		}
+
+		if (destination.droppableId === source.droppableId && destination.index === source.index) {
+			return;
+		}
+
+		console.log("Destination index " + destination.index);
+		console.log("Source index " + source.index)
+
+		const newtodos = Object.assign([], this.state.todos);
+		console.log(newtodos);
+		const droppedTodo = this.state.todos[source.index];
+
+		newtodos.splice(source.index, 1);
+		console.log(newtodos);
+		newtodos.splice(destination.index, 0, droppedTodo);
+		console.log(newtodos);
+
+		this.setState({
+		 	todos: newtodos
+		});
+	}
+
 	render() {
 		return (
-			<>
+			<DragDropContext onDragEnd={this.onDragEnd} >
 				<div className="heading">
 					<h3>TODO List</h3>
 				</div>
@@ -110,7 +140,7 @@ class Main extends Component {
 					deleteHandler={this.deleteHandler}
 					group={this.state.group}
 				 />
-			</>
+			</DragDropContext>
 		)
 	}
 }

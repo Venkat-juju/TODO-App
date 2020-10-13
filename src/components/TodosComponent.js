@@ -1,4 +1,5 @@
 import React from 'react';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 function Todo (props) {
 
@@ -12,6 +13,7 @@ function Todo (props) {
 
 	return (
 		<li>
+			<div className="dragger"></div>
 			<p className={`${ props.todo.completed ? "completed-task" : ""}`}>{props.todo.text}</p>
 			<button id="complete-btn" onClick={setCompleted} ><i className="fa fa-check"></i></button>
 			<button id="delete-btn" onClick={setDeleted} ><i className="fa fa-trash"></i></button>
@@ -31,20 +33,31 @@ function Todos(props) {
 			} else if(!todo.completed && props.group === 'uncompleted') {
 				return todo
 			}
-		}).map((todo) => {
+		}).map((todo, index) => {
 			return (
-				<Todo key={todo.id} 
+				<Draggable key={index} draggableId={index + ''} index={index}>
+				{(provided) => (
+					<div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+					<Todo key={todo.id} 
 					  todo={todo}
 					  completeHandler={props.completeHandler} 
 					  deleteHandler={props.deleteHandler}
-				/>
+					/>
+					</div>
+				)}
+				
+				</Draggable>
 			);
 	});
 
 	return (
-		<ul className="todos-content">
-			{renderTodos}
-		</ul>
+		<Droppable droppableId='dp1'>
+			{(provided) => (<ul ref={provided.innerRef} {...provided.droppableProps}>
+				{renderTodos}
+				{provided.placeholder}
+			</ul>)}
+			
+		</Droppable>
 	);
 }
 
